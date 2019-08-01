@@ -127,10 +127,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DAL\UserContext.cs" />
+    <Compile Include="DAL\DatabaseContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908010307009_InitialMigration.cs" />
+    <Compile Include="Migrations\201908010307009_InitialMigration.Designer.cs">
+      <DependentUpon>201908010307009_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908010315369_AddAccountTypeToDB.cs" />
+    <Compile Include="Migrations\201908010315369_AddAccountTypeToDB.Designer.cs">
+      <DependentUpon>201908010315369_AddAccountTypeToDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -175,7 +185,14 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201908010307009_InitialMigration.resx">
+      <DependentUpon>201908010307009_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908010315369_AddAccountTypeToDB.resx">
+      <DependentUpon>201908010315369_AddAccountTypeToDB.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
