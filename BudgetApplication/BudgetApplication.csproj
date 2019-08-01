@@ -147,9 +147,14 @@
     <Compile Include="Migrations\201908010352472_AddTransactionModel.Designer.cs">
       <DependentUpon>201908010352472_AddTransactionModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908010411435_AddAccountUserModelForTable.cs" />
+    <Compile Include="Migrations\201908010411435_AddAccountUserModelForTable.Designer.cs">
+      <DependentUpon>201908010411435_AddAccountUserModelForTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountType.cs" />
+    <Compile Include="Models\AccountUser.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -207,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908010352472_AddTransactionModel.resx">
       <DependentUpon>201908010352472_AddTransactionModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908010411435_AddAccountUserModelForTable.resx">
+      <DependentUpon>201908010411435_AddAccountUserModelForTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
