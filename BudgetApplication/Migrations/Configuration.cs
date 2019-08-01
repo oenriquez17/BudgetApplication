@@ -15,10 +15,15 @@ namespace BudgetApplication.Migrations
 
         protected override void Seed(BudgetApplication.DAL.DatabaseContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            context.User.AddOrUpdate(x => x.UserId,
+                new User() { Username = "oscar1709", Password = "1709" }
+                );
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            context.AccountType.AddOrUpdate(x => x.AccountTypeId,
+                new AccountType() { AccountTypeId = 1, AccountTypeName = "Checkings Account" },
+                new AccountType() { AccountTypeId = 2, AccountTypeName = "Savings Account"},
+                new AccountType() { AccountTypeId = 3, AccountTypeName = "Credit Card" }
+                );
         }
     }
 }

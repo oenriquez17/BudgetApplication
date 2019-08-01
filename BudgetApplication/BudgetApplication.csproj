@@ -139,8 +139,18 @@
     <Compile Include="Migrations\201908010315369_AddAccountTypeToDB.Designer.cs">
       <DependentUpon>201908010315369_AddAccountTypeToDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908010349208_AddAccountModel.cs" />
+    <Compile Include="Migrations\201908010349208_AddAccountModel.Designer.cs">
+      <DependentUpon>201908010349208_AddAccountModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908010352472_AddTransactionModel.cs" />
+    <Compile Include="Migrations\201908010352472_AddTransactionModel.Designer.cs">
+      <DependentUpon>201908010352472_AddTransactionModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountType.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,6 +201,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908010315369_AddAccountTypeToDB.resx">
       <DependentUpon>201908010315369_AddAccountTypeToDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908010349208_AddAccountModel.resx">
+      <DependentUpon>201908010349208_AddAccountModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908010352472_AddTransactionModel.resx">
+      <DependentUpon>201908010352472_AddTransactionModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
