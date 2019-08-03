@@ -2,7 +2,7 @@
 
 <h2>AccountForm</h2>
 
-@using (Html.BeginForm("SaveAccount", "Accounts", FormMethod.Post))
+@using (Html.BeginForm("SaveAccount", "Account", FormMethod.Post))
 {
     <div class="form-group">
         @Html.LabelFor(m => m.Account.AccountName)

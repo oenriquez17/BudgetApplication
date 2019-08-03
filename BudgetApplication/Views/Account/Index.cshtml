@@ -1,0 +1,15 @@
+﻿<h2>Accounts</h2>
+
+<!--This page will be the index for accounts. Will show table and such-->
+
+@section scripts
+{   
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "/api/accounts",
+                method: "GET"
+            });
+        });
+    </script>    
+}

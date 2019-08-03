@@ -10,12 +10,12 @@ using System.Data.Entity.Validation;
 
 namespace BudgetApplication.Controllers
 {
-    public class AccountsController : Controller
+    public class AccountController : Controller
     {
         //DB Context object. Initialized by class constructor
         DatabaseContext _context;
 
-        public AccountsController()
+        public AccountController()
         {
             _context = new DatabaseContext();
         }
