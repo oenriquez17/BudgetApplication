@@ -156,6 +156,10 @@
     <Compile Include="Migrations\201908031745329_MadeAccountNameRequired.Designer.cs">
       <DependentUpon>201908031745329_MadeAccountNameRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908031829374_AddedAccountTypeIDToAccountModel.cs" />
+    <Compile Include="Migrations\201908031829374_AddedAccountTypeIDToAccountModel.Designer.cs">
+      <DependentUpon>201908031829374_AddedAccountTypeIDToAccountModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -226,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908031745329_MadeAccountNameRequired.resx">
       <DependentUpon>201908031745329_MadeAccountNameRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908031829374_AddedAccountTypeIDToAccountModel.resx">
+      <DependentUpon>201908031829374_AddedAccountTypeIDToAccountModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BudgetApplication.Models;
 using BudgetApplication.ViewModels;
 using BudgetApplication.DAL;
+using System.Data.Entity.Validation;
 
 namespace BudgetApplication.Controllers
 {
@@ -29,6 +30,11 @@ namespace BudgetApplication.Controllers
         public ActionResult AccountForm()
         {
             var accountTypes = _context.AccountType.ToList();
+            foreach (var type in accountTypes)
+            {
+                System.Diagnostics.Debug.WriteLine(type.AccountTypeId);
+                System.Diagnostics.Debug.WriteLine(type.AccountTypeName);
+            }
             var accountViewModel = new NewAccountViewModel
             {
                 Account = new Account(),
@@ -39,9 +45,12 @@ namespace BudgetApplication.Controllers
 
         // POST: This action will add an account and redirect to Index
         [HttpPost]
-        public ActionResult SaveAccount(Account newAccount) 
+        public ActionResult SaveAccount(Account account) 
         {
-            _context.Account.Add(newAccount);
+            System.Diagnostics.Debug.WriteLine(account.AccountTypeId);
+
+            _context.Account.Add(account);
+            _context.SaveChanges();
 
             return RedirectToAction("Index", "Accounts");
         }

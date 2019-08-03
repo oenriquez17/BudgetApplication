@@ -2,7 +2,7 @@
 
 <h2>AccountForm</h2>
 
-@using (Html.BeginForm("SaveAccount", "Accounts"))
+@using (Html.BeginForm("SaveAccount", "Accounts", FormMethod.Post))
 {
     <div class="form-group">
         @Html.LabelFor(m => m.Account.AccountName)
@@ -10,9 +10,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Account.AccountType)
+        @Html.LabelFor(m => m.Account.AccountTypeId)
         @Html.DropDownListFor(
-            m => m.Account.AccountType,
+            m => m.Account.AccountTypeId,
             new SelectList(Model.AccountTypes,
             "AccountTypeId", "AccountTypeName"),
             "Select Account Type",
