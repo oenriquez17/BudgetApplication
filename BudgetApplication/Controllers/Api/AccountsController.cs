@@ -18,9 +18,13 @@ namespace BudgetApplication.Controllers.Api
             _context = new DatabaseContext();
         }
 
+        // GET api/accounts
         public IEnumerable<Account> GetAccounts()
         {
             return _context.Account.ToList();
         }
+
+        
+        
     }
 }

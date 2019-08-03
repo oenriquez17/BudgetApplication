@@ -1,6 +1,9 @@
 ﻿<h2>Accounts</h2>
 
 <!--This page will be the index for accounts. Will show table and such-->
+<div id="text">
+
+</div>
 
 @section scripts
 {   
@@ -8,7 +11,12 @@
         $(document).ready(function () {
             $.ajax({
                 url: "/api/accounts",
-                method: "GET"
+                contentType: "application/json; charset=utf-8",
+                method: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                }
             });
         });
     </script>    
