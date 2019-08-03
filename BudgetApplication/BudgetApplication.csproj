@@ -160,6 +160,10 @@
     <Compile Include="Migrations\201908031829374_AddedAccountTypeIDToAccountModel.Designer.cs">
       <DependentUpon>201908031829374_AddedAccountTypeIDToAccountModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908031857204_addedAccountIdtoTransactionTable.cs" />
+    <Compile Include="Migrations\201908031857204_addedAccountIdtoTransactionTable.Designer.cs">
+      <DependentUpon>201908031857204_addedAccountIdtoTransactionTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -233,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908031829374_AddedAccountTypeIDToAccountModel.resx">
       <DependentUpon>201908031829374_AddedAccountTypeIDToAccountModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908031857204_addedAccountIdtoTransactionTable.resx">
+      <DependentUpon>201908031857204_addedAccountIdtoTransactionTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

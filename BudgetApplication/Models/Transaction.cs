@@ -11,6 +11,7 @@ namespace BudgetApplication.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransactionId { get; set; }
         public double Ammount { get; set; }
+        public int AccountId { get; set; }
         public Account Account { get; set; }
         public DateTime DateOfTransaction { get; set; }
         public string Comments { get; set; }
