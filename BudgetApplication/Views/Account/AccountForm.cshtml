@@ -1,6 +1,11 @@
 ﻿@model BudgetApplication.ViewModels.NewAccountViewModel
 
-<h2>AccountForm</h2>
+@{
+    ViewBag.Title = "New Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Account Form</h2>
 
 @using (Html.BeginForm("SaveAccount", "Account", FormMethod.Post))
 {
