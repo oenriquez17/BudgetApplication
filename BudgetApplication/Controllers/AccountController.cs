@@ -32,11 +32,6 @@ namespace BudgetApplication.Controllers
         public ActionResult AccountForm()
         {
             var accountTypes = _context.AccountType.ToList();
-            foreach (var type in accountTypes)
-            {
-                System.Diagnostics.Debug.WriteLine(type.AccountTypeId);
-                System.Diagnostics.Debug.WriteLine(type.AccountTypeName);
-            }
             var accountViewModel = new NewAccountViewModel
             {
                 Account = new Account(),
@@ -49,12 +44,22 @@ namespace BudgetApplication.Controllers
         [HttpPost]
         public ActionResult SaveAccount(Account account) 
         {
-            System.Diagnostics.Debug.WriteLine(account.AccountTypeId);
 
             _context.Account.Add(account);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Accounts");
+            var accountId = account.AccountId;
+            var userId = (int) Session["userId"];
+            var accountUser = new AccountUser
+            {
+                AccountId = accountId,
+                UserId = userId
+            };
+
+            _context.AccountUser.Add(accountUser);
+            _context.SaveChanges();
+                
+            return RedirectToAction("Index", "Account");
         }
     }
 }
