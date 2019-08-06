@@ -9,13 +9,13 @@ namespace BudgetApplication.SessionAuth
 {
     public class CheckSession : ActionFilterAttribute
     {
+
+        //This method checks if a session exists. If it doesn't, it redirects the user to the Login Page
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-          
 
             if (filterContext.HttpContext.Session["userId"] == null)
             {
-                System.Diagnostics.Debug.WriteLine("Session is null");
                 // check if a new session id was generated
                 filterContext.Result = new RedirectResult("~/User/Index");
                 return;
