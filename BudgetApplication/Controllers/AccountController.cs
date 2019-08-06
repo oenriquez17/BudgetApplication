@@ -8,6 +8,7 @@ using BudgetApplication.Models;
 using BudgetApplication.ViewModels;
 using BudgetApplication.DAL;
 using System.Data.Entity.Validation;
+using BudgetApplication.SessionAuth;
 
 namespace BudgetApplication.Controllers
 {
@@ -22,13 +23,33 @@ namespace BudgetApplication.Controllers
         }
         
         // GET: Accounts
+        [CheckSession]
         public ActionResult Index()
         {
+            var userId = (int) Session["userId"];
+            var query = from a in _context.Account.Include(a => a.AccountType)
+                        join au in _context.AccountUser
+                        on a.AccountId equals au.AccountId
+                        where au.UserId == userId
+                        select new
+                        {
+                            AccountName = a.AccountName,
+                            AccountType = a.AccountType,
+                            Balance = a.Balance
+                        };
+
+            foreach(var acc in query)
+            {
+                System.Diagnostics.Debug.WriteLine(acc.AccountName);
+            }
+
             var accounts = _context.Account.Include(a => a.AccountType).ToList();
+            
             return View(accounts);
         }
 
         // Shows the new/update account form
+        [CheckSession]
         public ActionResult AccountForm()
         {
             var accountTypes = _context.AccountType.ToList();
