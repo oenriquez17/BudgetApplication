@@ -39,7 +39,7 @@ namespace BudgetApplication.Controllers
 
             if(usersFound != null) {
                 Session["userId"] = usersFound.UserId;
-                return RedirectToAction("Index", "Account");
+                return RedirectToAction("Index", "Dashboard");
             } else {
                 ViewData["ErrorMessage"] = "Username or Password are invalid";
                 return View("Index");

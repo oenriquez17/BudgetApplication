@@ -26,3 +26,7 @@ textarea {
 .field-validation-error {
     color: red;
 }
+
+.chart-container {
+    width : 75%;
+}
