@@ -10672,3 +10672,7 @@ th {
 .card-title, .card-header {
   color: inherit;
 }
+
+.collapse.in {
+    display: block;
+}

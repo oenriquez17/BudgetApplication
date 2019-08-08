@@ -56,12 +56,15 @@ var config = {
                     beginAtZero: true
                 }
             }], xAxes: [{
+                gridLines: {
+                    color: 'white'
+                },
                 barPercentage: 0.4
             }]
         }, tooltips: {
             callbacks: {
                 label: function (tooltipItem, data) {
-                    return tooltipItem.yLabel;
+                    return "$ " + tooltipItem.yLabel.toFixed(2);
                 }
             }
         }
