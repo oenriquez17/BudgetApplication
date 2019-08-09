@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using BudgetApplication.DAL;
 using System.Data.Entity;
 using BudgetApplication.Models;
+using BudgetApplication.ViewModels;
+using BudgetApplication.SessionAuth;
 
 namespace BudgetApplication.Controllers
 {
@@ -24,13 +26,19 @@ namespace BudgetApplication.Controllers
             return View();
         }
 
-
-        public ActionResult NewTransaction()
+        [CheckSession]
+        public ActionResult TransactionForm()
         {
             var accounts = getAccounts();
+            var transactionFormViewModel = new NewTransactionViewModel
+            {
+                Accounts = accounts,
+                PrimaryTransaction = new Transaction(),
+                SecondaryTransaction = new Transaction()
+            };
 
             //Given the list of accounts, the user will be able to selecte accounts
-            return View(accounts);
+            return View(transactionFormViewModel);
         }
 
         // Method to generate list of accounts based on user Id
