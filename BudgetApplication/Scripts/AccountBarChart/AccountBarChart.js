@@ -72,7 +72,6 @@ var config = {
 }
 
 window.onload = function () {
-    console.log(accs);
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, config);
 }

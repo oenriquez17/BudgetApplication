@@ -17,6 +17,11 @@
     
     <script>
         var accs = @Html.Raw(Json.Encode(Model));
+        var accTypesId = [
+            '@BudgetApplication.Models.AccountType.Checkings',
+            '@BudgetApplication.Models.AccountType.Savings',
+            '@BudgetApplication.Models.AccountType.CreditCard'
+        ];
     </script>
 
     <script type="text/javascript" src="@Url.Content("~/Scripts/AccountBarChart/AccountBarChart.js")"></script>

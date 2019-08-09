@@ -12,6 +12,6 @@ namespace BudgetApplication.Models
 
         public static readonly byte Checkings = 1;
         public static readonly byte Savings = 2;
-        public static readonly byte Credit = 3;
+        public static readonly byte CreditCard = 3;
     }
 }
