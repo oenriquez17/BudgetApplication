@@ -15,11 +15,29 @@
             new SelectList(Model.Accounts,
             "AccountId", "AccountName"),
             "Select Account",
-            new { @class = "form-control" })
+            new { @class = "form-control", @id = "primaryAccountDropdown" })
     </div>
 
 
     <button type="submit" class="btn btn-primary">Save</button>
 
+}
 
+@section scripts
+{
+    <script>
+        var accounts = @Html.Raw(Json.Encode(Model.Accounts));
+
+        $(document).ready(function () {
+            $('#primaryAccountDropdown').change(function () {
+                var selected = $('#primaryAccountDropdown option:selected').val();
+                var selectedAccount = accounts.find(function (acc) {
+                    return acc.AccountId == selected;
+                });
+                if (selectedAccount != null) {
+                    console.log(selectedAccount.AccountType);
+                }
+            });
+        });
+    </script>
 }

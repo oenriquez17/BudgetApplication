@@ -30,6 +30,7 @@ namespace BudgetApplication.Controllers
         public ActionResult TransactionForm()
         {
             var accounts = getAccounts();
+            System.Diagnostics.Debug.WriteLine(accounts[0].AccountId);
             var transactionFormViewModel = new NewTransactionViewModel
             {
                 Accounts = accounts,
@@ -53,6 +54,7 @@ namespace BudgetApplication.Controllers
                         where au.UserId == userId
                         select new
                         {
+                            AccountId = a.AccountId,
                             AccountName = a.AccountName,
                             AccountType = a.AccountType,
                             AccountTypeId = a.AccountTypeId,
@@ -63,6 +65,7 @@ namespace BudgetApplication.Controllers
             {
                 accounts.Add(new Account
                 {
+                    AccountId = acc.AccountId,
                     AccountName = acc.AccountName,
                     AccountType = acc.AccountType,
                     AccountTypeId = acc.AccountTypeId,
