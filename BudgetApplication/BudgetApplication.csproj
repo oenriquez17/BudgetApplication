@@ -135,6 +135,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\TransactionController.cs" />
+    <Compile Include="Migrations\201908140304399_AddingTransactionType.cs" />
+    <Compile Include="Migrations\201908140304399_AddingTransactionType.Designer.cs">
+      <DependentUpon>201908140304399_AddingTransactionType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransactionType.cs" />
     <Compile Include="SessionAuth\CheckSession.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -316,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908042027214_userModelChange.resx">
       <DependentUpon>201908042027214_userModelChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908140304399_AddingTransactionType.resx">
+      <DependentUpon>201908140304399_AddingTransactionType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

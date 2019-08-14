@@ -14,9 +14,17 @@ namespace BudgetApplication.SessionAuth
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
 
+            //If no session is found, save source page and redirect user after login
             if (filterContext.HttpContext.Session["userId"] == null)
             {
-                // check if a new session id was generated
+                var sourcePath = filterContext.HttpContext.Request.Path;
+                string[] url = sourcePath.TrimStart('/').Split('/');
+                if (url.Length == 2)
+                {
+                    filterContext.HttpContext.Session["targetController"] = url[0];
+                    filterContext.HttpContext.Session["targetAction"] = url[1];
+                }
+
                 filterContext.Result = new RedirectResult("~/User/Index");
                 return;
             }

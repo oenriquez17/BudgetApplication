@@ -20,7 +20,7 @@ namespace BudgetApplication.Controllers
         // GET: Index view = Login page
         public ActionResult Index()
         {
-            if(Session["userId"] == null)
+            if (Session["userId"] == null)
             {
                 return View();
             } else
@@ -38,8 +38,25 @@ namespace BudgetApplication.Controllers
                 .FirstOrDefault();
 
             if(usersFound != null) {
+                //Set session variable
                 Session["userId"] = usersFound.UserId;
-                return RedirectToAction("Index", "Dashboard");
+
+                //Check if user was trying to access a specific page
+                if (Session["targetController"] != null && Session["targetAction"] != null)
+                {
+                    //Get controller and action
+                    string controller = (string) Session["targetController"];
+                    string action = (string) Session["targetAction"];
+
+                    //Destroy variables from session
+                    Session.Remove("targetController");
+                    Session.Remove("targetAction");
+
+                    return RedirectToAction(action, controller);
+                } else
+                {
+                    return RedirectToAction("Index", "Dashboard");
+                }
             } else {
                 ViewData["ErrorMessage"] = "Username or Password are invalid";
                 return View("Index");

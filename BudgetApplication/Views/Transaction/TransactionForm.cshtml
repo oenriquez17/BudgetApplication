@@ -18,6 +18,41 @@
             new { @class = "form-control", @id = "primaryAccountDropdown" })
     </div>
 
+    <div class="container" id="balanceContainer" style="display: none;">
+        <p>Balance</p>
+        <p id="balanceText"></p>
+    </div>
+
+    <div id="debitActionForm" class="form-group" style="display: none;">
+        @Html.LabelFor(m => m.DebitTransactionTypes)
+        @Html.DropDownListFor(
+            m => m.DebitTransactionTypes,
+            new SelectList(Model.DebitTransactionTypes,
+            "TransactionTypeId", "TransactionTypeName"),
+            "Select Action",
+            new { @class = "form-control" })
+    </div>
+
+    <div id="creditActionForm" class="form-group" style="display: none;">
+        @Html.LabelFor(m => m.CreditTransactionTypes)
+        @Html.DropDownListFor(
+            m => m.CreditTransactionTypes,
+            new SelectList(Model.CreditTransactionTypes,
+            "TransactionTypeId", "TransactionTypeName"),
+            "Select Transaction Type",
+            new { @class = "form-control" })
+    </div>
+
+    <div id="targetAccountTransfer" class="form-group" style="display: none;">
+        @Html.LabelFor(m => m.Accounts)
+        @Html.DropDownListFor(
+            m => m.Accounts,
+            new SelectList(Model.Accounts,
+            "AccountId", "AccountName"),
+            "Select Transaction Type",
+            new { @class = "form-control", @id = "secondaryAccountDropdown" })
+    </div>
+
 
     <button type="submit" class="btn btn-primary">Save</button>
 
@@ -27,17 +62,31 @@
 {
     <script>
         var accounts = @Html.Raw(Json.Encode(Model.Accounts));
+        var checkings = '@BudgetApplication.Models.AccountType.Checkings';
+        var savings = '@BudgetApplication.Models.AccountType.Savings';
+        var creditCard = '@BudgetApplication.Models.AccountType.CreditCard';
 
         $(document).ready(function () {
+
             $('#primaryAccountDropdown').change(function () {
                 var selected = $('#primaryAccountDropdown option:selected').val();
                 var selectedAccount = accounts.find(function (acc) {
                     return acc.AccountId == selected;
                 });
                 if (selectedAccount != null) {
-                    console.log(selectedAccount.AccountType);
+                    // show balance on selection
+                    $('#balanceContainer').removeAttr('style');
+
+                    //show debit/credit dropdown
+                    $('#balanceText').append('$ ' + selectedAccount.Balance);
+                    if (selectedAccount.AccountType.AccountTypeId == creditCard) {
+                        $('#creditActionForm').removeAttr('style');
+                    } else {
+                        $('#debitActionForm').removeAttr('style');
+                    }
                 }
             });
+
         });
     </script>
 }

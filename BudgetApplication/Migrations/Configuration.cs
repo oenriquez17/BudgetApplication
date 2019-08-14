@@ -24,6 +24,13 @@ namespace BudgetApplication.Migrations
                 new AccountType() { AccountTypeId = 2, AccountTypeName = "Savings Account"},
                 new AccountType() { AccountTypeId = 3, AccountTypeName = "Credit Card" }
                 );
+
+            context.TransactionType.AddOrUpdate(x => x.TransactionTypeId,
+                new TransactionType() { TransactionTypeId = 1, TransactionTypeName = "Transaction" },
+                new TransactionType() { TransactionTypeId = 2, TransactionTypeName = "Transfer" },
+                new TransactionType() { TransactionTypeId = 3, TransactionTypeName = "Deposit" },
+                new TransactionType() { TransactionTypeId = 4, TransactionTypeName = "Payment" }
+                );
         }
     }
 }

@@ -30,12 +30,13 @@ namespace BudgetApplication.Controllers
         public ActionResult TransactionForm()
         {
             var accounts = getAccounts();
-            System.Diagnostics.Debug.WriteLine(accounts[0].AccountId);
+            var debitTransactionTypes = getDebitTransactionTypes();
+            var creditTransactionTypes = getCreditTransactionTypes();
             var transactionFormViewModel = new NewTransactionViewModel
             {
                 Accounts = accounts,
-                PrimaryTransaction = new Transaction(),
-                SecondaryTransaction = new Transaction()
+                DebitTransactionTypes = debitTransactionTypes,
+                CreditTransactionTypes = debitTransactionTypes
             };
 
             //Given the list of accounts, the user will be able to selecte accounts
@@ -74,6 +75,27 @@ namespace BudgetApplication.Controllers
             }
 
             return accounts;
+        }
+
+        private IEnumerable<TransactionType> getCreditTransactionTypes()
+        {
+            var creditTransactionTypes = _context.TransactionType
+                .Where(
+                x => x.TransactionTypeId == TransactionType.Transaction ||
+                x.TransactionTypeId == TransactionType.Payment)
+                .ToList();
+            return creditTransactionTypes;
+        }
+
+        private IEnumerable<TransactionType> getDebitTransactionTypes()
+        {
+            var debitTransactionTypes = _context.TransactionType
+                .Where(
+                x => x.TransactionTypeId == TransactionType.Transaction ||
+                x.TransactionTypeId == TransactionType.Deposit ||
+                x.TransactionTypeId == TransactionType.Transfer)
+                .ToList();
+            return debitTransactionTypes;
         }
     }
 }
