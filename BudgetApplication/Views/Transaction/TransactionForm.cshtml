@@ -9,9 +9,9 @@
 {
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Accounts)
+        @Html.LabelFor(m => m.SelectedPrimaryAccountId)
         @Html.DropDownListFor(
-            m => m.Accounts,
+            m => m.SelectedPrimaryAccountId,
             new SelectList(Model.Accounts,
             "AccountId", "AccountName"),
             "Select Account",
@@ -24,23 +24,29 @@
     </div>
 
     <div id="debitActionForm" class="form-group" style="display: none;">
-        @Html.LabelFor(m => m.DebitTransactionTypes)
+        @Html.LabelFor(m => m.SelectedDebitTransactionType)
         @Html.DropDownListFor(
-            m => m.DebitTransactionTypes,
+            m => m.SelectedDebitTransactionType,
             new SelectList(Model.DebitTransactionTypes,
             "TransactionTypeId", "TransactionTypeName"),
-            "Select Action",
-            new { @class = "form-control" })
+            "Select Transaction Type",
+            new { @class = "form-control", @id = "debitTransactionDropdown" })
     </div>
 
     <div id="creditActionForm" class="form-group" style="display: none;">
-        @Html.LabelFor(m => m.CreditTransactionTypes)
+        @Html.LabelFor(m => m.SelectedCreditTransactionType)
         @Html.DropDownListFor(
-            m => m.CreditTransactionTypes,
+            m => m.SelectedCreditTransactionType,
             new SelectList(Model.CreditTransactionTypes,
             "TransactionTypeId", "TransactionTypeName"),
             "Select Transaction Type",
             new { @class = "form-control" })
+    </div>
+
+    <div class="form-group" id="amountField" style="display: none;">
+        @Html.LabelFor(m => m.TransactionAmount)
+        @Html.TextBoxFor(m => m.TransactionAmount,
+       new { @class = "form-control" })
     </div>
 
     <div id="targetAccountTransfer" class="form-group" style="display: none;">
@@ -65,8 +71,12 @@
         var checkings = '@BudgetApplication.Models.AccountType.Checkings';
         var savings = '@BudgetApplication.Models.AccountType.Savings';
         var creditCard = '@BudgetApplication.Models.AccountType.CreditCard';
+        var transferId = '@BudgetApplication.Models.TransactionType.Transfer';
 
         $(document).ready(function () {
+
+            //Add this line to a onSubmit code
+            $('#transactionForm').trigger("reset");
 
             $('#primaryAccountDropdown').change(function () {
                 var selected = $('#primaryAccountDropdown option:selected').val();
@@ -79,11 +89,24 @@
 
                     //show debit/credit dropdown
                     $('#balanceText').append('$ ' + selectedAccount.Balance);
+
                     if (selectedAccount.AccountType.AccountTypeId == creditCard) {
                         $('#creditActionForm').removeAttr('style');
                     } else {
                         $('#debitActionForm').removeAttr('style');
                     }
+
+                    $('#amountField').removeAttr('style');
+                }
+            });
+
+            $('#debitTransactionDropdown').change(function () {
+                var selected = $('#debitTransactionDropdown option:selected').val();
+                if (selected == transferId) {
+                    // show balance on selection
+                    $('#targetAccountTransfer').removeAttr('style');
+                } else {
+                    $('#targetAccountTransfer').css("display", "none");
                 }
             });
 

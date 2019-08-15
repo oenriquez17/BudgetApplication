@@ -32,15 +32,22 @@ namespace BudgetApplication.Controllers
             var accounts = getAccounts();
             var debitTransactionTypes = getDebitTransactionTypes();
             var creditTransactionTypes = getCreditTransactionTypes();
+
             var transactionFormViewModel = new NewTransactionViewModel
             {
                 Accounts = accounts,
                 DebitTransactionTypes = debitTransactionTypes,
-                CreditTransactionTypes = debitTransactionTypes
+                CreditTransactionTypes = creditTransactionTypes
             };
 
             //Given the list of accounts, the user will be able to selecte accounts
             return View(transactionFormViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult ProcessTransaction(NewTransactionViewModel model)
+        {
+            return Content(model.SelectedPrimaryAccountId.ToString());
         }
 
         // Method to generate list of accounts based on user Id
@@ -84,6 +91,7 @@ namespace BudgetApplication.Controllers
                 x => x.TransactionTypeId == TransactionType.Transaction ||
                 x.TransactionTypeId == TransactionType.Payment)
                 .ToList();
+
             return creditTransactionTypes;
         }
 
@@ -95,6 +103,7 @@ namespace BudgetApplication.Controllers
                 x.TransactionTypeId == TransactionType.Deposit ||
                 x.TransactionTypeId == TransactionType.Transfer)
                 .ToList();
+
             return debitTransactionTypes;
         }
     }
