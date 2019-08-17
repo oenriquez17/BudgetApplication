@@ -18,7 +18,7 @@
             new { @class = "form-control", @id = "primaryAccountDropdown" })
     </div>
 
-    <div class="container" id="balanceContainer" style="display: none;">
+    <div id="balanceContainer" style="display: none;">
         <p>Balance</p>
         <p id="balanceText"></p>
     </div>
@@ -43,9 +43,10 @@
             new { @class = "form-control" })
     </div>
 
+   
     <div class="form-group" id="amountField" style="display: none;">
         @Html.LabelFor(m => m.TransactionAmount)
-        @Html.TextBoxFor(m => m.TransactionAmount,
+        @Html.TextBoxFor(m => m.TransactionAmount, "{0:#.#}",
        new { @class = "form-control" })
     </div>
 
@@ -57,6 +58,20 @@
             "AccountId", "AccountName"),
             "Select Transaction Type",
             new { @class = "form-control", @id = "secondaryAccountDropdown" })
+    </div>
+
+    //add date field on top of comment
+    <div class="form-group" id="dateField" style="display: none;">
+        @Html.LabelFor(m => m.TransactionDate)
+        @Html.TextBoxFor(model => model.TransactionDate,
+           new { @class = "form-control", @type = "date",
+               @Value = Model.TransactionDate.ToString("yyyy-MM-dd") })
+    </div>
+
+    <div class="form-group" id="commentField" style="display: none;">
+        @Html.LabelFor(m => m.Comment)
+        @Html.TextAreaFor(m => m.Comment,
+       new { @class = "form-control" })
     </div>
 
 
@@ -87,8 +102,14 @@
                     // show balance on selection
                     $('#balanceContainer').removeAttr('style');
 
+                    //show comment
+                    $('#commentField').removeAttr('style');
+
+                    //show date
+                    $('#dateField').removeAttr('style');
+
                     //show debit/credit dropdown
-                    $('#balanceText').append('$ ' + selectedAccount.Balance);
+                    $('#balanceText').append('$ ' + selectedAccount.Balance.toFixed(2));
 
                     if (selectedAccount.AccountType.AccountTypeId == creditCard) {
                         $('#creditActionForm').removeAttr('style');

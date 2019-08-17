@@ -7,12 +7,16 @@
 
 <h2>Accounts</h2>
 
+<br />
+
+<!--Add here the div for add account button-->
+
 <div class="container">
     <table class="table table-hover">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th>Account Name</th>
-                <th>Type</th>
+                <th>Account Type</th>
                 <th>Balance</th>
             </tr>
         </thead>
@@ -23,7 +27,7 @@
                 <tr>
                     <td>@account.AccountName</td>
                     <td>@account.AccountType.AccountTypeName</td>
-                    <td>@account.Balance</td>
+                    <td>$ @account.Balance.ToString("0.00")</td>
                 </tr>
             }
         </tbody>

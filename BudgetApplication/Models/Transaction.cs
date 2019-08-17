@@ -14,7 +14,7 @@ namespace BudgetApplication.Models
 
         public TransactionType TransactionType { get; set; }
 
-        public double Ammount { get; set; }
+        public double Amount { get; set; }
 
         public int AccountId { get; set; }
 

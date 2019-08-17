@@ -139,6 +139,10 @@
     <Compile Include="Migrations\201908140304399_AddingTransactionType.Designer.cs">
       <DependentUpon>201908140304399_AddingTransactionType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908152330496_fixedTypoInTransactionModel.cs" />
+    <Compile Include="Migrations\201908152330496_fixedTypoInTransactionModel.Designer.cs">
+      <DependentUpon>201908152330496_fixedTypoInTransactionModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\TransactionType.cs" />
     <Compile Include="SessionAuth\CheckSession.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -324,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908140304399_AddingTransactionType.resx">
       <DependentUpon>201908140304399_AddingTransactionType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908152330496_fixedTypoInTransactionModel.resx">
+      <DependentUpon>201908152330496_fixedTypoInTransactionModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -37,7 +37,8 @@ namespace BudgetApplication.Controllers
             {
                 Accounts = accounts,
                 DebitTransactionTypes = debitTransactionTypes,
-                CreditTransactionTypes = creditTransactionTypes
+                CreditTransactionTypes = creditTransactionTypes,
+                TransactionDate = DateTime.Now
             };
 
             //Given the list of accounts, the user will be able to selecte accounts
@@ -47,7 +48,46 @@ namespace BudgetApplication.Controllers
         [HttpPost]
         public ActionResult ProcessTransaction(NewTransactionViewModel model)
         {
-            return Content(model.SelectedPrimaryAccountId.ToString());
+            int primaryAccountId = model.SelectedPrimaryAccountId;
+            double transactionAmount = model.TransactionAmount;
+            int transactionTypeId = 0;
+            //Debit Transaction Type
+            if (model.SelectedDebitTransactionType != null)
+            {
+
+            }
+            //Credit Transaction Type
+            else
+            {
+                transactionTypeId = Int32.Parse(model.SelectedCreditTransactionType);
+                if(transactionTypeId.Equals(TransactionType.Payment.ToString()))
+                {
+                    //subtract amount
+                } else
+                {
+                    //add amount
+                }
+            }
+
+            //test
+            createTransaction(primaryAccountId, transactionTypeId, transactionAmount);
+
+
+            return Content("TEST");
+        }
+
+        private void createTransaction(int AccountId, int TransactionTypeId, double Amount)
+        {
+            var newTransaction = new Transaction
+            {
+                TransactionTypeId = TransactionTypeId,
+                AccountId = AccountId,
+                Amount = Amount,
+                DateOfTransaction = DateTime.Now
+            };
+
+            _context.Transaction.Add(newTransaction);
+            _context.SaveChanges();
         }
 
         // Method to generate list of accounts based on user Id

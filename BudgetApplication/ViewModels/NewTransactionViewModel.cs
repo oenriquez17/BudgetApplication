@@ -11,9 +11,9 @@ namespace BudgetApplication.ViewModels
 {
     public class NewTransactionViewModel
     {
-        [Display(Name = "Account")]
         public List<Account> Accounts { get; set; }
 
+        [Display(Name = "Account")]
         public int SelectedPrimaryAccountId { get; set; }
 
         public IEnumerable<TransactionType> DebitTransactionTypes { get; set; }
@@ -28,6 +28,11 @@ namespace BudgetApplication.ViewModels
 
         [Display(Name = "Transaction Amount")]
         public double TransactionAmount { get; set; }
+
+        public string Comment { get; set; }
+
+        [Display(Name = "Transaction Date")]
+        public DateTime TransactionDate { get; set; }
 
         public int SelectedTargetAccountId { get; set; }
     }
