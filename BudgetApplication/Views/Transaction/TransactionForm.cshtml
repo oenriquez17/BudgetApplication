@@ -8,16 +8,16 @@
 @using (Html.BeginForm("ProcessTransaction", "Transaction", FormMethod.Post))
 {
 
-<div class="form-group">
-    @Html.LabelFor(m => m.SelectedPrimaryAccountId)
-    @Html.DropDownListFor(
-        m => m.SelectedPrimaryAccountId,
-        new SelectList(Model.Accounts,
-        "AccountId", "AccountName"),
-        "Select Account",
-        new { @class = "form-control", @id = "primaryAccountDropdown" })
-    @Html.ValidationMessageFor(m => m.SelectedPrimaryAccountId)
-</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SelectedPrimaryAccountId)
+        @Html.DropDownListFor(
+            m => m.SelectedPrimaryAccountId,
+            new SelectList(Model.Accounts,
+            "AccountId", "AccountName"),
+            "Select Account",
+            new { @class = "form-control", @id = "primaryAccountDropdown" })
+        @Html.ValidationMessageFor(m => m.SelectedPrimaryAccountId)
+    </div>
 
     <div id="balanceContainer" class="hidden">
         <p>Balance</p>
@@ -44,11 +44,15 @@
             new { @class = "form-control" })
     </div>
 
-
-    <div class="form-group hidden" id="amountField">
+    <div id="amountField" class="form-group hidden">
         @Html.LabelFor(m => m.TransactionAmount)
-        @Html.TextBoxFor(m => m.TransactionAmount, "{0:#.#}",
-       new { @class = "form-control" })
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+            </div>
+            @Html.TextBoxFor(m => m.TransactionAmount, "{0:#.#}",
+           new { @class = "form-control" })
+        </div>
     </div>
 
     <div id="targetAccountTransfer" class="form-group hidden">

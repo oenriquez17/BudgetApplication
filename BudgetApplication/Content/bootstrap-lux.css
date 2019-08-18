@@ -10676,3 +10676,18 @@ th {
 .collapse.in {
     display: block;
 }
+
+.positive-account {
+    /*Purple*/
+    background-color: #A78AD4 !important;
+}
+
+.negative-account {
+    /*Yellow*/
+    background-color: #DEBD52 !important;
+}
+
+.account-table {
+    color: #fff;
+    background-color: #B7BDB8;
+}

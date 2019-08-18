@@ -297,6 +297,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Transaction\TransactionForm.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908010307009_InitialMigration.resx">

@@ -43,10 +43,10 @@ namespace BudgetApplication.Controllers
                         where au.UserId == userId
                         select new 
                         {
-                            AccountName = a.AccountName,
-                            AccountType = a.AccountType,
-                            AccountTypeId = a.AccountTypeId,
-                            Balance = a.Balance
+                            a.AccountName,
+                            a.AccountType,
+                            a.AccountTypeId,
+                            a.Balance
                         };
 
             foreach(var acc in query)
@@ -63,7 +63,7 @@ namespace BudgetApplication.Controllers
             return accounts;
         }
 
-        // Shows the new/update account form
+        // Shows the new account form
         [CheckSession]
         public ActionResult AccountForm()
         {

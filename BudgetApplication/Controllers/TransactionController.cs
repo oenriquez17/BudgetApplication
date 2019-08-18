@@ -24,7 +24,10 @@ namespace BudgetApplication.Controllers
         [CheckSession]
         public ActionResult Index()
         {
-            return View();
+            int userId = (int)Session["userId"];
+            var transactions = GetAllTransactions(userId);
+
+            return View(transactions);
         }
 
         // Gets all the transactions for a user
@@ -38,14 +41,14 @@ namespace BudgetApplication.Controllers
                            where au.UserId == userId
                            select new
                            {
-                               TransactionId = t.TransactionId,
-                               TransactionTypeId = t.TransactionTypeId,
-                               TransactionType = t.TransactionType,
-                               Amount = t.Amount,
-                               AccountId = t.AccountId,
-                               Account = t.Account,
-                               DateOfTransaction = t.DateOfTransaction,
-                               Comments = t.Comments
+                               t.TransactionId,
+                               t.TransactionTypeId,
+                               t.TransactionType,
+                               t.Amount,
+                               t.AccountId,
+                               t.Account,
+                               t.DateOfTransaction,
+                               t.Comments
                            };
 
             foreach(var transaction in query)

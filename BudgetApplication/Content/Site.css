@@ -38,3 +38,13 @@ textarea {
 .hidden {
     display: none;
 }
+
+.positive-account {
+    /*Purple*/
+    background-color: #A78AD4 !important;
+}
+
+.negative-account {
+    /*Yellow*/
+    background-color: #DEBD52 !important;
+}

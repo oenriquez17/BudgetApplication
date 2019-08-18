@@ -1,12 +1,12 @@
-﻿// blue -> checkings, savings
-var blue = 'rgba(54, 162, 235, 1)';
-// red -> credit cards
-var red = 'rgba(224, 30, 30, 1)';
+﻿// purple -> checkings, savings
+var purple = 'rgba(167, 138, 212, 1)';
+// yellow -> credit cards
+var yellow = 'rgba(222, 189, 82, 1)';
 
 // green -> postive net total
-var green = 'rgba(63, 191, 63, 1)';
-// black -> negative net total
-var black = 'rgba(0, 0, 0, 1)';
+var green = 'rgba(95, 221, 125, 1)';
+// gray -> negative net total
+var gray = 'rgba(183, 189, 184, 1)';
 
 var accounts = [];
 var amounts = [];
@@ -39,15 +39,15 @@ function getColors() {
 
     for (var i = 0; i < accs.length; i++) {
         if (accs[i].AccountTypeId == accTypesId[2]) {
-            colors[i] = red;
+            colors[i] = yellow;
         } else {
-            colors[i] = blue;
+            colors[i] = purple;
         }
     }
     if (amounts[accs.length] >= 0) {
         colors[accs.length] = green;
     } else {
-        colors[accs.length] = black;
+        colors[accs.length] = gray;
     }
 }
 
@@ -79,7 +79,7 @@ var config = {
                 gridLines: {
                     color: 'white'
                 },
-                barPercentage: 0.4
+                barPercentage: 0.5
             }]
         }, tooltips: {
             callbacks: {
