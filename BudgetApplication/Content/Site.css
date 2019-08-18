@@ -28,5 +28,13 @@ textarea {
 }
 
 .chart-container {
-    width : 75%;
+    width: 75%;
+}
+
+.clearFloatRight {
+    clear: both;
+}
+
+.hidden {
+    display: none;
 }

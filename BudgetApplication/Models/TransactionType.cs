@@ -16,5 +16,9 @@ namespace BudgetApplication.Models
         public static readonly byte Deposit = 3;
         //Credit
         public static readonly byte Payment = 4;
+
+        //Action
+        public static readonly string Add = "Add";
+        public static readonly string Substract = "Substract";
     }
 }

@@ -18,12 +18,12 @@
             new { @class = "form-control", @id = "primaryAccountDropdown" })
     </div>
 
-    <div id="balanceContainer" style="display: none;">
+    <div id="balanceContainer" class="hidden">
         <p>Balance</p>
         <p id="balanceText"></p>
     </div>
 
-    <div id="debitActionForm" class="form-group" style="display: none;">
+    <div id="debitActionForm" class="form-group hidden">
         @Html.LabelFor(m => m.SelectedDebitTransactionType)
         @Html.DropDownListFor(
             m => m.SelectedDebitTransactionType,
@@ -33,7 +33,7 @@
             new { @class = "form-control", @id = "debitTransactionDropdown" })
     </div>
 
-    <div id="creditActionForm" class="form-group" style="display: none;">
+    <div id="creditActionForm" class="form-group hidden">
         @Html.LabelFor(m => m.SelectedCreditTransactionType)
         @Html.DropDownListFor(
             m => m.SelectedCreditTransactionType,
@@ -44,13 +44,13 @@
     </div>
 
    
-    <div class="form-group" id="amountField" style="display: none;">
+    <div class="form-group hidden" id="amountField">
         @Html.LabelFor(m => m.TransactionAmount)
         @Html.TextBoxFor(m => m.TransactionAmount, "{0:#.#}",
        new { @class = "form-control" })
     </div>
 
-    <div id="targetAccountTransfer" class="form-group" style="display: none;">
+    <div id="targetAccountTransfer" class="form-group hidden">
         @Html.LabelFor(m => m.Accounts)
         @Html.DropDownListFor(
             m => m.Accounts,
@@ -61,14 +61,14 @@
     </div>
 
     //add date field on top of comment
-    <div class="form-group" id="dateField" style="display: none;">
+    <div class="form-group hidden" id="dateField">
         @Html.LabelFor(m => m.TransactionDate)
         @Html.TextBoxFor(model => model.TransactionDate,
            new { @class = "form-control", @type = "date",
                @Value = Model.TransactionDate.ToString("yyyy-MM-dd") })
     </div>
 
-    <div class="form-group" id="commentField" style="display: none;">
+    <div class="form-group hidden" id="commentField">
         @Html.LabelFor(m => m.Comment)
         @Html.TextAreaFor(m => m.Comment,
        new { @class = "form-control" })
@@ -100,24 +100,24 @@
                 });
                 if (selectedAccount != null) {
                     // show balance on selection
-                    $('#balanceContainer').removeAttr('style');
+                    $('#balanceContainer').removeClass('hidden');
 
                     //show comment
-                    $('#commentField').removeAttr('style');
+                    $('#commentField').removeClass('hidden');
 
                     //show date
-                    $('#dateField').removeAttr('style');
+                    $('#dateField').removeClass('hidden');
 
                     //show debit/credit dropdown
                     $('#balanceText').append('$ ' + selectedAccount.Balance.toFixed(2));
 
                     if (selectedAccount.AccountType.AccountTypeId == creditCard) {
-                        $('#creditActionForm').removeAttr('style');
+                        $('#creditActionForm').removeClass('hidden');
                     } else {
-                        $('#debitActionForm').removeAttr('style');
+                        $('#debitActionForm').removeClass('hidden');
                     }
 
-                    $('#amountField').removeAttr('style');
+                    $('#amountField').removeClass('hidden');
                 }
             });
 
@@ -125,9 +125,9 @@
                 var selected = $('#debitTransactionDropdown option:selected').val();
                 if (selected == transferId) {
                     // show balance on selection
-                    $('#targetAccountTransfer').removeAttr('style');
+                    $('#targetAccountTransfer').removeClass('hidden');
                 } else {
-                    $('#targetAccountTransfer').css("display", "none");
+                    $('#targetAccountTransfer').addClass('hidden');
                 }
             });
 
