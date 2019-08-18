@@ -14,6 +14,7 @@ namespace BudgetApplication.ViewModels
         public List<Account> Accounts { get; set; }
 
         [Display(Name = "Account")]
+        [Required]
         public int SelectedPrimaryAccountId { get; set; }
 
         public IEnumerable<TransactionType> DebitTransactionTypes { get; set; }
@@ -21,12 +22,15 @@ namespace BudgetApplication.ViewModels
         public IEnumerable<TransactionType> CreditTransactionTypes { get; set; }
 
         [Display(Name = "Transaction Type")]
+        //Special Validation
         public string SelectedCreditTransactionType { get; set; }
 
         [Display(Name = "Transaction Type")]
+        //Special Validation
         public string SelectedDebitTransactionType { get; set; }
 
         [Display(Name = "Transaction Amount")]
+        //Special Validation
         public double TransactionAmount { get; set; }
 
         public string Comment { get; set; }
@@ -34,6 +38,8 @@ namespace BudgetApplication.ViewModels
         [Display(Name = "Transaction Date")]
         public DateTime TransactionDate { get; set; }
 
+        [Display(Name = "Transfer To Account")]
+        //Special Validation
         public int SelectedTargetAccountId { get; set; }
     }
 }

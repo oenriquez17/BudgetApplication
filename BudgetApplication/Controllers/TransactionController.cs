@@ -21,9 +21,49 @@ namespace BudgetApplication.Controllers
         }
         
         // GET: Transaction
+        [CheckSession]
         public ActionResult Index()
         {
             return View();
+        }
+
+        // Gets all the transactions for a user
+        private List<Transaction> GetAllTransactions(int userId)
+        {
+            List<Transaction> transactions = new List<Transaction>();
+
+            var query = from t in _context.Transaction.Include(t => t.TransactionType)
+                           join au in _context.AccountUser
+                           on t.AccountId equals au.AccountId
+                           where au.UserId == userId
+                           select new
+                           {
+                               TransactionId = t.TransactionId,
+                               TransactionTypeId = t.TransactionTypeId,
+                               TransactionType = t.TransactionType,
+                               Amount = t.Amount,
+                               AccountId = t.AccountId,
+                               Account = t.Account,
+                               DateOfTransaction = t.DateOfTransaction,
+                               Comments = t.Comments
+                           };
+
+            foreach(var transaction in query)
+            {
+                transactions.Add(new Transaction
+                {
+                    TransactionId = transaction.TransactionId,
+                    TransactionTypeId = transaction.TransactionTypeId,
+                    TransactionType = transaction.TransactionType,
+                    Amount = transaction.Amount,
+                    AccountId = transaction.AccountId,
+                    Account = transaction.Account,
+                    DateOfTransaction = transaction.DateOfTransaction,
+                    Comments = transaction.Comments
+                });
+            }
+
+            return transactions;
         }
 
         [CheckSession]
