@@ -23,10 +23,16 @@
                     : "negative-account";
             <div class="col-sm-3">
                 <div class="card text-white @color mb-3 " style="max-width: 20rem;">
-                    <div class="card-header">@account.AccountType.AccountTypeName</div>
+                    <div class="card-header">
+                        @account.AccountType.AccountTypeName
+                    </div>
                     <div class="card-body">
                         <h4 class="card-title">@account.AccountName</h4>
                         <p class="card-text">$ @account.Balance.ToString("0.00")</p>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="@account.AccountId" checked>
+                            <label class="custom-control-label" for="@account.AccountId">Show on graph</label>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -97,6 +97,50 @@ window.onload = function () {
     getAmounts();
     getColors();
 
+    handleToggle();
+
     var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, config);
+    window.myChart = new Chart(ctx, config);
+}
+
+function handleToggle() {
+    for (var i = 0; i < accs.length; i++) {
+        var id = '#' + accs[i].AccountId;
+        $(id).click(function () {
+            var isChecked = $('#' + this.id).is(":checked");
+
+            if (!isChecked) {
+                var index = findIndex(this.id);
+
+                filterAccounts(index);
+
+                window.myChart.update();
+            } else {
+                
+                getAccounts();
+                getAmounts();
+                getColors();
+
+                console.log(amounts);
+
+                window.myChart.update();
+            }
+            //window.myChart.update();
+        })
+    }
+}
+
+function findIndex(id) {
+    for (var i = 0; i < accs.length; i++) {
+        if (accs[i].AccountId == id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function filterAccounts(index) {
+    accounts.splice(index, 1);
+    amounts.splice(index, 1); //recalculate
+    colors.splice(index, 1); //recalculate
 }

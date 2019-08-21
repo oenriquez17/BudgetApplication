@@ -14,7 +14,6 @@ namespace BudgetApplication.ViewModels
         public List<Account> Accounts { get; set; }
 
         [Display(Name = "Account")]
-        [Required]
         public int SelectedPrimaryAccountId { get; set; }
 
         public IEnumerable<TransactionType> DebitTransactionTypes { get; set; }

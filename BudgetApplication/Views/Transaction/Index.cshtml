@@ -1,4 +1,4 @@
-﻿@model List<BudgetApplication.Models.Transaction>
+﻿@model BudgetApplication.ViewModels.TransactionDashboardViewModel
 
 @{
     ViewBag.Title = "Transactions";
@@ -8,5 +8,21 @@
 <h2>Transactions</h2>
 
 <div class="container">
+    <h4>@Model.Accounts.Count</h4>
+    <h4>@Model.AccountIdTransactionDict.Count</h4>
 
+    @foreach (var account in Model.Accounts)
+    {
+        <h6>@account.AccountName</h6>
+        if (Model.AccountIdTransactionDict.ContainsKey(account.AccountId))
+        {
+            var list = Model.AccountIdTransactionDict[account.AccountId];
+            foreach (var transaction in list)
+            {
+                <p>@transaction.TransactionType.TransactionTypeName</p>
+                <p>@transaction.Amount</p>
+            }
+        }
+
+    }
 </div>

@@ -31,10 +31,15 @@ namespace BudgetApplication.Controllers
         }
 
         // Gets all the transactions for a user
-        private List<Transaction> GetAllTransactions(int userId)
+        private TransactionDashboardViewModel GetAllTransactions(int userId)
         {
-            List<Transaction> transactions = new List<Transaction>();
+            Dictionary<int, List<Transaction>> accountIdTransactionDict =
+                new Dictionary<int, List<Transaction>>();
 
+            //Get accounts
+            List<Account> accounts = getAccounts();
+
+            //Get ALL transactions
             var query = from t in _context.Transaction.Include(t => t.TransactionType)
                            join au in _context.AccountUser
                            on t.AccountId equals au.AccountId
@@ -51,22 +56,51 @@ namespace BudgetApplication.Controllers
                                t.Comments
                            };
 
+            //Organize transactions per Account
             foreach(var transaction in query)
             {
-                transactions.Add(new Transaction
+                if (accountIdTransactionDict.ContainsKey(transaction.AccountId))
                 {
-                    TransactionId = transaction.TransactionId,
-                    TransactionTypeId = transaction.TransactionTypeId,
-                    TransactionType = transaction.TransactionType,
-                    Amount = transaction.Amount,
-                    AccountId = transaction.AccountId,
-                    Account = transaction.Account,
-                    DateOfTransaction = transaction.DateOfTransaction,
-                    Comments = transaction.Comments
-                });
+                    List<Transaction> transactions = accountIdTransactionDict[transaction.AccountId];
+                    transactions.Add(new Transaction
+                    {
+                        TransactionId = transaction.TransactionId,
+                        TransactionTypeId = transaction.TransactionTypeId,
+                        TransactionType = transaction.TransactionType,
+                        Amount = transaction.Amount,
+                        AccountId = transaction.AccountId,
+                        Account = transaction.Account,
+                        DateOfTransaction = transaction.DateOfTransaction,
+                        Comments = transaction.Comments
+                    });
+
+                    accountIdTransactionDict[transaction.AccountId] = transactions;
+
+                } else
+                {
+                    List<Transaction> transactions = new List<Transaction>();
+                    transactions.Add(new Transaction
+                    {
+                        TransactionId = transaction.TransactionId,
+                        TransactionTypeId = transaction.TransactionTypeId,
+                        TransactionType = transaction.TransactionType,
+                        Amount = transaction.Amount,
+                        AccountId = transaction.AccountId,
+                        Account = transaction.Account,
+                        DateOfTransaction = transaction.DateOfTransaction,
+                        Comments = transaction.Comments
+                    });
+                    accountIdTransactionDict.Add(transaction.AccountId, transactions);
+                }
             }
 
-            return transactions;
+            var transactionDashboardViewModel = new TransactionDashboardViewModel()
+            {
+                AccountIdTransactionDict = accountIdTransactionDict,
+                Accounts = accounts
+            };
+
+            return transactionDashboardViewModel;
         }
 
         [CheckSession]
@@ -99,6 +133,12 @@ namespace BudgetApplication.Controllers
             string comment = model.Comment;
             DateTime transactionDate = model.TransactionDate;
             string op = TransactionType.Add; // Add is default
+
+            System.Diagnostics.Debug.WriteLine(primaryAccountId);
+            System.Diagnostics.Debug.WriteLine(targetAccountId);
+            System.Diagnostics.Debug.WriteLine(comment);
+            System.Diagnostics.Debug.WriteLine(transactionAmount);
+            System.Diagnostics.Debug.WriteLine(transactionDate);
 
             int transactionTypeId = 0;
             //Debit Transaction Type
@@ -208,12 +248,17 @@ namespace BudgetApplication.Controllers
         private bool updateAccountBalance(int AccountId, double TransactionAmount, string Op)
         {
             bool retVal = false;
-            var account = _context.Account.SingleOrDefault(x => x.AccountId == AccountId);
+            var account = _context.Account.Include(x => x.AccountType).SingleOrDefault(x => x.AccountId == AccountId);
             if(account != null)
             {
+                System.Diagnostics.Debug.WriteLine(account.AccountId);
+                System.Diagnostics.Debug.WriteLine(account.AccountName);
+                System.Diagnostics.Debug.WriteLine(account.AccountTypeId);
+
                 account.AccountId = account.AccountId;
                 account.AccountName = account.AccountName;
                 account.AccountTypeId = account.AccountTypeId;
+                account.AccountType = account.AccountType;
                 double currentBalance = account.Balance;
 
                 if (Op.Equals(TransactionType.Add))

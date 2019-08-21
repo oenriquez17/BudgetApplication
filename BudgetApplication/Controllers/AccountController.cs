@@ -80,6 +80,15 @@ namespace BudgetApplication.Controllers
         [HttpPost]
         public ActionResult SaveAccount(Account account) 
         {
+            if (!ModelState.IsValid)
+            {
+                var accountViewModel = new NewAccountViewModel
+                {
+                    Account = account,
+                    AccountTypes = _context.AccountType.ToList()
+                };
+                return View(accountViewModel);
+            }
 
             _context.Account.Add(account);
             _context.SaveChanges();

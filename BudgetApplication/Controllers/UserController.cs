@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BudgetApplication.DAL;
 using BudgetApplication.Models;
+using BudgetApplication.ViewModels;
 
 namespace BudgetApplication.Controllers
 {
@@ -61,6 +62,26 @@ namespace BudgetApplication.Controllers
                 ViewData["ErrorMessage"] = "Username or Password are invalid";
                 return View("Index");
             }
+        }
+
+        public ActionResult Register()
+        {
+           
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ProcessRegister(RegisterViewModel model)
+        {
+            var newUser = _context.User.Add(new User
+            {
+                Username = model.Username,
+                Password = model.Password
+            });
+
+            Session["userId"] = newUser.UserId;
+
+            return RedirectToAction("Index", "Account");
         }
     }
 }
