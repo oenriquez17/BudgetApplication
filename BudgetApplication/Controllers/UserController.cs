@@ -83,5 +83,11 @@ namespace BudgetApplication.Controllers
 
             return RedirectToAction("Index", "Account");
         }
+
+        public ActionResult Logout()
+        {
+            Session["userId"] = null;
+            return View("Index");
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace BudgetApplication.ViewModels
 
         public string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again !")]
+        [Compare("Password", ErrorMessage = "Confirm password doesn't match.")]
         public string PasswordConfirmation { get; set; }
     }
 }

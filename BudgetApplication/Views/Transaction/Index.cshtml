@@ -8,8 +8,6 @@
 <h2>Transactions</h2>
 
 <div class="container">
-    <h4>@Model.Accounts.Count</h4>
-    <h4>@Model.AccountIdTransactionDict.Count</h4>
 
     @foreach (var account in Model.Accounts)
     {
@@ -21,6 +19,7 @@
             {
                 <p>@transaction.TransactionType.TransactionTypeName</p>
                 <p>@transaction.Amount</p>
+                <p>@transaction.Comments</p>
             }
         }
 

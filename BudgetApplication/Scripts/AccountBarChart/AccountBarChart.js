@@ -8,57 +8,60 @@ var green = 'rgba(95, 221, 125, 1)';
 // gray -> negative net total
 var gray = 'rgba(183, 189, 184, 1)';
 
-var accounts = [];
-var amounts = [];
-var colors = [];
+var myAccounts = [];
+var myAmounts = [];
+var myColors = [];
+
+var shownAccountIds = new Set();
 
 function getAccounts() {
 
-    for (var i = 0; i < accs.length; i++) {
-        accounts[i] = accs[i].AccountName;
+    for (var i = 0; i < accounts.length; i++) {
+        myAccounts[i] = accounts[i].AccountName;
+        shownAccountIds.add(accounts[i].AccountId);
     }
-    accounts[accs.length] = 'Total';
+    myAccounts[accounts.length] = 'Total';
 }
 
 function getAmounts() {
 
     var net = 0.0;
-    for (var i = 0; i < accs.length; i++) {
-        amounts[i] = accs[i].Balance;
-        if (accs[i].AccountTypeId == accTypesId[2]) {
-            net -= accs[i].Balance;
+    for (var i = 0; i < accounts.length; i++) {
+        myAmounts[i] = accounts[i].Balance;
+        if (accounts[i].AccountTypeId == accountTypeIds[2]) {
+            net -= accounts[i].Balance;
         } else {
-            net += accs[i].Balance;
+            net += accounts[i].Balance;
         }
     }
     
-    amounts[accs.length] = net;
+    myAmounts[accounts.length] = net;
 }
 
 function getColors() {
 
-    for (var i = 0; i < accs.length; i++) {
-        if (accs[i].AccountTypeId == accTypesId[2]) {
-            colors[i] = yellow;
+    for (var i = 0; i < accounts.length; i++) {
+        if (accounts[i].AccountTypeId == accountTypeIds[2]) {
+            myColors[i] = yellow;
         } else {
-            colors[i] = purple;
+            myColors[i] = purple;
         }
     }
-    if (amounts[accs.length] >= 0) {
-        colors[accs.length] = green;
+    if (myAmounts[accounts.length] >= 0) {
+        myColors[accounts.length] = green;
     } else {
-        colors[accs.length] = gray;
+        myColors[accounts.length] = gray;
     }
 }
 
 var config = {
     type: 'bar',
     data: {
-        labels: accounts,
+        labels: myAccounts,
         datasets: [{
-            data: amounts,
-            backgroundColor: colors,
-            borderColor: colors,
+            data: myAmounts,
+            backgroundColor: myColors,
+            borderColor: myColors,
             borderWidth: 1
         }]
     },
@@ -73,7 +76,10 @@ var config = {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    callback: function (value, index, values) {
+                        return '$ ' + value;
+                    }
                 }
             }], xAxes: [{
                 gridLines: {
@@ -104,43 +110,81 @@ window.onload = function () {
 }
 
 function handleToggle() {
-    for (var i = 0; i < accs.length; i++) {
-        var id = '#' + accs[i].AccountId;
+    for (var i = 0; i < accounts.length; i++) {
+        var id = '#' + accounts[i].AccountId;
         $(id).click(function () {
             var isChecked = $('#' + this.id).is(":checked");
-
+            console.log(shownAccountIds);
             if (!isChecked) {
-                var index = findIndex(this.id);
-
-                filterAccounts(index);
-
-                window.myChart.update();
+                var hideId = parseInt(this.id);
+                shownAccountIds.delete(hideId);
             } else {
-                
-                getAccounts();
-                getAmounts();
-                getColors();
-
-                console.log(amounts);
-
-                window.myChart.update();
+                var showId = parseInt(this.id);
+                shownAccountIds.add(showId);
             }
-            //window.myChart.update();
+
+            console.log(shownAccountIds);
+
+            filterBarChart();
+
+
+            window.myChart.update();
         })
     }
 }
 
-function findIndex(id) {
-    for (var i = 0; i < accs.length; i++) {
-        if (accs[i].AccountId == id) {
-            return i;
+function filterBarChart() {
+
+    myAccounts.splice(0, myAccounts.length);
+    var index = 0;
+
+    for (var i = 0; i < accounts.length; i++) {
+        if (shownAccountIds.has(accounts[i].AccountId)) {
+            myAccounts[index++] = accounts[i].AccountName;
         }
     }
-    return -1;
+    myAccounts[index] = 'Total';
+
+    getFilteredAmounts();
+    getFilteredColors();
 }
 
-function filterAccounts(index) {
-    accounts.splice(index, 1);
-    amounts.splice(index, 1); //recalculate
-    colors.splice(index, 1); //recalculate
+function getFilteredAmounts() {
+    myAmounts.splice(0, myAmounts.length);
+    var index = 0;
+
+    var net = 0.0;
+    for (var i = 0; i < accounts.length; i++) {
+        if (shownAccountIds.has(accounts[i].AccountId)) {
+            myAmounts[index++] = accounts[i].Balance;
+            if (accounts[i].AccountTypeId == accountTypeIds[2]) {
+                net -= accounts[i].Balance;
+            } else {
+                net += accounts[i].Balance;
+            }
+        }
+    }
+
+    myAmounts[index] = net;
+}
+
+function getFilteredColors() {
+    myColors.splice(0, myColors.length);
+    var index = 0;
+
+    for (var i = 0; i < accounts.length; i++) {
+        if (shownAccountIds.has(accounts[i].AccountId)) {
+            if (accounts[i].AccountTypeId == accountTypeIds[2]) {
+                myColors[index++] = yellow;
+            } else {
+                myColors[index++] = purple;
+            }
+        }
+    }
+
+    if (myAmounts[myAmounts.length - 1] >= 0) {
+        myColors[index] = green;
+    } else {
+        myColors[index] = gray;
+    }
 }

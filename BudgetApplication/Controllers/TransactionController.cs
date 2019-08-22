@@ -134,12 +134,6 @@ namespace BudgetApplication.Controllers
             DateTime transactionDate = model.TransactionDate;
             string op = TransactionType.Add; // Add is default
 
-            System.Diagnostics.Debug.WriteLine(primaryAccountId);
-            System.Diagnostics.Debug.WriteLine(targetAccountId);
-            System.Diagnostics.Debug.WriteLine(comment);
-            System.Diagnostics.Debug.WriteLine(transactionAmount);
-            System.Diagnostics.Debug.WriteLine(transactionDate);
-
             int transactionTypeId = 0;
             //Debit Transaction Type
             if (model.SelectedDebitTransactionType != null)
@@ -251,10 +245,6 @@ namespace BudgetApplication.Controllers
             var account = _context.Account.Include(x => x.AccountType).SingleOrDefault(x => x.AccountId == AccountId);
             if(account != null)
             {
-                System.Diagnostics.Debug.WriteLine(account.AccountId);
-                System.Diagnostics.Debug.WriteLine(account.AccountName);
-                System.Diagnostics.Debug.WriteLine(account.AccountTypeId);
-
                 account.AccountId = account.AccountId;
                 account.AccountName = account.AccountName;
                 account.AccountTypeId = account.AccountTypeId;
