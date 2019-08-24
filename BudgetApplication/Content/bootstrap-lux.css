@@ -10691,3 +10691,15 @@ th {
     color: #fff;
     background-color: #B7BDB8;
 }
+
+.positive-account-table {
+    /*Purple*/
+    color: #fff;
+    background-color: #A78AD4;
+}
+
+.negative-account-table {
+    /*Yellow*/
+    color: #fff;
+    background-color: #DEBD52;
+}

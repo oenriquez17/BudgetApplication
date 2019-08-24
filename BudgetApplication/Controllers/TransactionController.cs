@@ -139,9 +139,11 @@ namespace BudgetApplication.Controllers
             if (model.SelectedDebitTransactionType != null)
             {
                 transactionTypeId = Int32.Parse(model.SelectedDebitTransactionType);
-                if (transactionTypeId.Equals(TransactionType.Deposit.ToString()))
+                System.Diagnostics.Debug.WriteLine(transactionTypeId);
+                if (transactionTypeId == (int)TransactionType.Deposit)
                 {
                     //Add amount
+                    System.Diagnostics.Debug.WriteLine("Adding");
                     op = TransactionType.Add;
                 }
                 else
@@ -154,7 +156,7 @@ namespace BudgetApplication.Controllers
             else
             {
                 transactionTypeId = Int32.Parse(model.SelectedCreditTransactionType);
-                if(transactionTypeId.Equals(TransactionType.Payment.ToString()))
+                if(transactionTypeId == (int)TransactionType.Payment)
                 {
                     //subtract amount
                     op = TransactionType.Substract;
@@ -200,7 +202,7 @@ namespace BudgetApplication.Controllers
 
             }
 
-            return Content("TEST");
+            return RedirectToAction("Index");
         }
 
         private int retrieveAccountTypeIdByAccountId(int AccountId)
@@ -253,6 +255,7 @@ namespace BudgetApplication.Controllers
 
                 if (Op.Equals(TransactionType.Add))
                 {
+                    System.Diagnostics.Debug.WriteLine("Adding");
                     currentBalance += TransactionAmount;
                 } else
                 {
