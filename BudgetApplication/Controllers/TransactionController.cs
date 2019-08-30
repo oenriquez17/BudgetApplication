@@ -30,6 +30,15 @@ namespace BudgetApplication.Controllers
             return View(transactions);
         }
 
+        [CheckSession]
+        public ActionResult Transactions()
+        {
+            int userId = (int)Session["userId"];
+            var transactions = GetAllTransactionsList(userId);
+
+            return View(transactions);
+        }
+
         // Gets all the transactions for a user
         private TransactionDashboardViewModel GetAllTransactions(int userId)
         {
@@ -101,6 +110,55 @@ namespace BudgetApplication.Controllers
             };
 
             return transactionDashboardViewModel;
+        }
+
+        // Gets all the transactions for a user
+        private TransactionsViewModel GetAllTransactionsList(int userId)
+        {
+            //Get accounts
+            List<Account> accounts = getAccounts();
+
+            //Get ALL transactions
+            var query = from t in _context.Transaction.Include(t => t.TransactionType)
+                        join au in _context.AccountUser
+                        on t.AccountId equals au.AccountId
+                        where au.UserId == userId
+                        select new
+                        {
+                            t.TransactionId,
+                            t.TransactionTypeId,
+                            t.TransactionType,
+                            t.Amount,
+                            t.AccountId,
+                            t.Account,
+                            t.DateOfTransaction,
+                            t.Comments
+                        };
+
+            List<Transaction> transactions = new List<Transaction>();
+
+            foreach (var transaction in query)
+            {
+                transactions.Add(new Transaction
+                {
+                    TransactionId = transaction.TransactionId,
+                    TransactionTypeId = transaction.TransactionTypeId,
+                    TransactionType = transaction.TransactionType,
+                    Amount = transaction.Amount,
+                    AccountId = transaction.AccountId,
+                    Account = transaction.Account,
+                    DateOfTransaction = transaction.DateOfTransaction,
+                    Comments = transaction.Comments
+                });
+            }
+
+            var transactionViewModel = new TransactionsViewModel()
+            {
+                Transactions = transactions,
+                Accounts = accounts
+            };
+
+            return transactionViewModel;
         }
 
         [CheckSession]

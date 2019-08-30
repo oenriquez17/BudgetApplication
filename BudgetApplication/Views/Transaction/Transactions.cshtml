@@ -1,0 +1,32 @@
+﻿@model BudgetApplication.ViewModels.TransactionsViewModel
+
+@{
+    ViewBag.Title = "Transactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Transactions</h2>
+
+<div id="chart-container" class="container chart-container">
+    <canvas id="myChart"></canvas>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ChartJs/dist/Chart.js")"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+
+    <script>
+        var accounts = @Html.Raw(Json.Encode(Model.Accounts));
+        var transactions = @Html.Raw(Json.Encode(Model.Transactions));
+        var transactionTypeIds = [
+            '@BudgetApplication.Models.TransactionType.Deposit',
+            '@BudgetApplication.Models.TransactionType.Transaction',
+            '@BudgetApplication.Models.TransactionType.Transfer',
+            '@BudgetApplication.Models.TransactionType.Payment'
+        ];
+    </script>
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/TransactionTimeChart/TransactionTimeChart.js")"></script>
+
+}

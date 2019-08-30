@@ -205,6 +205,7 @@
     <Compile Include="ViewModels\NewTransactionViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\TransactionDashboardViewModel.cs" />
+    <Compile Include="ViewModels\TransactionsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\BudgetAppDatabase.mdf" />
@@ -265,6 +266,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\TransactionTimeChart\TransactionTimeChart.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -301,6 +303,7 @@
     <Content Include="Views\Transaction\TransactionForm.cshtml" />
     <Content Include="Views\Transaction\Index.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Transaction\Transactions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908010307009_InitialMigration.resx">
