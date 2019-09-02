@@ -8,18 +8,6 @@
 <h2>Transactions</h2>
 
 <div class="container">
-    @Html.LabelFor(m => m.SelectedAccount)
-    @Html.DropDownListFor(
-        m => m.SelectedAccount,
-        new SelectList(Model.Accounts,
-        "AccountId", "AccountName"),
-        "Select Account",
-        new { @class = "form-control", @id = "selectAccountDropdown" })
-</div>
-
-<br />
-
-<div class="container">
     @foreach (var account in Model.Accounts)
     {
         if (Model.AccountIdTransactionDict.ContainsKey(account.AccountId))
@@ -29,7 +17,7 @@
                      account.AccountTypeId != BudgetApplication.Models.AccountType.CreditCard
                      ? "positive-account-table"
                      : "negative-account-table";
-            <table id="@account.AccountId" class="hidden table table-hover">
+            <table class="table table-hover">
                 <thead class=@color>
                     <tr>
                         <th>@account.AccountName</th>
@@ -44,7 +32,7 @@
                     {
                         <tr>
                             <td>@transaction.TransactionType.TransactionTypeName</td>
-                            <td>$ @transaction.Amount.ToString("0.00")</td>
+                            <td>@transaction.Amount</td>
                             <td>@transaction.Comments</td>
                         </tr>
                     }
@@ -53,9 +41,3 @@
         }
     }
 </div>
-
-@section scripts{
-    <script type="text/javascript" src="@Url.Content("~/Scripts/Transactions/FilterAccountTransactions.js")"></script>
-}
-
-

@@ -19,7 +19,7 @@ namespace BudgetApplication.Controllers
         {
             _context = new DatabaseContext();
         }
-        
+
         // GET: Transaction
         [CheckSession]
         public ActionResult Index()
@@ -289,14 +289,6 @@ namespace BudgetApplication.Controllers
 
             _context.Transaction.Add(newTransaction);
             _context.SaveChanges();
-        }
-
-        // Checks if UserID - AccountID record exists
-        private bool verifyAccountUser(int AccountId, int UserId)
-        {
-            bool retVal = false;
-            retVal = _context.AccountUser.Any(x => x.AccountId == AccountId && x.UserId == UserId);
-            return retVal;
         }
 
         private bool updateAccountBalance(int AccountId, double TransactionAmount, string Op)

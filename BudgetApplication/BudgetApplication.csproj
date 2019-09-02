@@ -267,6 +267,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Transactions\FilterAccountTransactions.js" />
     <Content Include="Scripts\TransactionTimeChart\TransactionTimeChart.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
@@ -302,9 +303,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Transaction\TransactionForm.cshtml" />
-    <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Transaction\Index2.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Transaction\Transactions.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908010307009_InitialMigration.resx">
