@@ -24,7 +24,22 @@ namespace BudgetApplication.Controllers.Api
             return _context.Account.ToList();
         }
 
-        
-        
+
+        // DELETE /api/customers/1
+        [HttpDelete]
+        public void DeleteAccount(int id)
+        {
+            var accountsInDB = _context.Account.SingleOrDefault(a => a.AccountId == id);
+
+            if (accountsInDB == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            else
+            {
+                _context.Account.Remove(accountsInDB);
+                _context.SaveChanges();
+            }
+        }
     }
 }

@@ -15,12 +15,13 @@
 <br />
 
 <div class="container">
-    <table class="table table-hover">
+    <table id="accountsTable" class="table table-hover">
         <thead class="account-table">
             <tr>
                 <th>Account Name</th>
                 <th>Account Type</th>
                 <th>Balance</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -31,8 +32,15 @@
                     <td class="text-primary">@account.AccountName</td>
                     <td class="text-primary">@account.AccountType.AccountTypeName</td>
                     <td class="text-primary">$ @account.Balance.ToString("0.00")</td>
+                    <td>
+                        <button data-account-id="@account.AccountId" class="btn btn-outline-danger btn-sm js-delete">Delete</button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Accounts/Delete.js")"></script>    
+}

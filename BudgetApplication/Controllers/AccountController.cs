@@ -43,6 +43,7 @@ namespace BudgetApplication.Controllers
                         where au.UserId == userId
                         select new 
                         {
+                            a.AccountId,
                             a.AccountName,
                             a.AccountType,
                             a.AccountTypeId,
@@ -53,6 +54,7 @@ namespace BudgetApplication.Controllers
             {
                 accounts.Add(new Account
                 {
+                    AccountId = acc.AccountId,
                     AccountName = acc.AccountName,
                     AccountType = acc.AccountType,
                     AccountTypeId = acc.AccountTypeId,
