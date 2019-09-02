@@ -6,6 +6,10 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @if (IsSectionDefined("AddIcons"))
+    {
+        @RenderSection("AddIcons", required: false)
+    }
 </head>
 <body>
     @if (Session["userId"] != null)

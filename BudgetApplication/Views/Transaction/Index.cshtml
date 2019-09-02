@@ -32,8 +32,10 @@
             <table id="@account.AccountId" class="hidden table table-hover">
                 <thead class=@color>
                     <tr>
-                        <th>@account.AccountName</th>
-                        <th></th>
+                        <th>Type</th>
+                        <th>Ammount</th>
+                        <th>Date</th>
+                        <th>Comments</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -45,9 +47,26 @@
                         <tr>
                             <td>@transaction.TransactionType.TransactionTypeName</td>
                             <td>$ @transaction.Amount.ToString("0.00")</td>
+                            <td>@transaction.DateOfTransaction.ToString("MM/dd/yyyy")</td>
                             <td>@transaction.Comments</td>
+                            <td>
+                                <i class="material-icons">delete</i>
+                            </td>
                         </tr>
                     }
+                </tbody>
+            </table>
+        } else
+        {
+            <table id="@account.AccountId" class="hidden table table-hover">
+                <thead>
+                    <tr>
+                        <th>No transactions found</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
                 </tbody>
             </table>
         }
@@ -56,6 +75,10 @@
 
 @section scripts{
     <script type="text/javascript" src="@Url.Content("~/Scripts/Transactions/FilterAccountTransactions.js")"></script>
+}
+
+@section AddIcons{
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 }
 
 

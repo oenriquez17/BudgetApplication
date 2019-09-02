@@ -11,7 +11,7 @@
     @Html.ActionLink("Add Account", "AccountForm", "Account", null, new { @class = "btn btn-primary float-right" })
 </div>
 
-<br class="clearFloatRight"/>
+<br class="clearFloatRight" />
 <br />
 
 <div class="container">
@@ -33,7 +33,9 @@
                     <td class="text-primary">@account.AccountType.AccountTypeName</td>
                     <td class="text-primary">$ @account.Balance.ToString("0.00")</td>
                     <td>
-                        <button data-account-id="@account.AccountId" class="btn btn-outline-danger btn-sm js-delete">Delete</button>
+                        <button data-account-id="@account.AccountId" class="btn btn-sm js-delete">
+                            <i class="material-icons">delete</i>
+                        </button>
                     </td>
                 </tr>
             }
@@ -42,5 +44,9 @@
 </div>
 
 @section scripts{
-    <script type="text/javascript" src="@Url.Content("~/Scripts/Accounts/Delete.js")"></script>    
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Accounts/Delete.js")"></script>
+}
+
+@section AddIcons{
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 }
