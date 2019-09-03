@@ -53,6 +53,7 @@ namespace BudgetApplication.Controllers
                            join au in _context.AccountUser
                            on t.AccountId equals au.AccountId
                            where au.UserId == userId
+                           orderby t.DateOfTransaction descending
                            select new
                            {
                                t.TransactionId,

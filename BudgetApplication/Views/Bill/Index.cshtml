@@ -1,0 +1,88 @@
+﻿@model BudgetApplication.ViewModels.BillsViewModel
+
+@{
+    ViewBag.Title = "Bills";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bills</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm text-right">
+            <button id="back" class="btn btn-small shadow-none">
+                <i class="material-icons">
+                    arrow_back_ios
+                </i>
+            </button>
+        </div>
+        <div class="col-sm text-center">
+            <h4 id="monthYear">@DateTime.Now.ToString("MMMM") @DateTime.Now.Year</h4>
+        </div>
+        <div class="col-sm">
+            <button id="forward" class="btn btn-small shadow-none">
+                <i class="material-icons">
+                    arrow_forward_ios
+                </i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="container">
+    <table id="billsTable" class="table table-hover">
+        <thead class="bill-table">
+            <tr>
+                <th>Name</th>
+                <th>Paid</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var bill in Model.AllBills)
+            {
+                string chk = "";
+                if (Model.PaidBills.Exists(
+                    b => (b.MonthlyBillId == bill.MonthlyBillId
+                    &&
+                    b.PaidThisMonth.Month.Equals(DateTime.Now.Month)
+                    &&
+                    b.PaidThisMonth.Year.Equals(DateTime.Now.Year))
+                    ))
+                {
+                    chk = "checked";
+                }
+                <tr>
+                    <td class="text-primary">@bill.MonthlyBillName</td>
+                    <td>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="@bill.MonthlyBillId" @chk>
+                                <label class="custom-control-label" for="@bill.MonthlyBillId"></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        var c = new Date();
+        var currentMonth = c.getMonth() + 1;
+        var currentYear = c.getFullYear();
+
+        var allBills = @Html.Raw(Json.Encode(Model.AllBills));
+        var paidBills = @Html.Raw(Json.Encode(Model.PaidBills));
+    </script>
+    
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Bills/Bills.js")"></script>
+}
+
+@section AddIcons{
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+}

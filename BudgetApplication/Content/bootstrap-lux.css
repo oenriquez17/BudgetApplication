@@ -10687,7 +10687,7 @@ th {
     background-color: #DEBD52 !important;
 }
 
-.account-table {
+.account-table, .bill-table {
     color: #fff;
     background-color: #B7BDB8;
 }

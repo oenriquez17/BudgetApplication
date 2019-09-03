@@ -9,8 +9,6 @@
                     button.parents("tr").remove();
                 }
             })
-        } else {
-            button.blur();
         }
     });
 });

@@ -15,6 +15,8 @@ namespace BudgetApplication.DAL
         public DbSet<Transaction> Transaction { get; set; }
         public DbSet<AccountUser> AccountUser { get; set; }
         public DbSet<TransactionType> TransactionType { get; set; }
+        public DbSet<MonthlyBill> MonthlyBill { get; set; }
+        public DbSet<PaidBillsMap> PaidBillsMap { get; set; }
 
         public DatabaseContext() : base("BudgetAppDBConnetion")
         {

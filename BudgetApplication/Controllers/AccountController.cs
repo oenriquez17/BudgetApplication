@@ -106,7 +106,7 @@ namespace BudgetApplication.Controllers
             _context.AccountUser.Add(accountUser);
             _context.SaveChanges();
                 
-            return RedirectToAction("Index", "Account");
+            return RedirectToAction("Index");
         }
     }
 }
