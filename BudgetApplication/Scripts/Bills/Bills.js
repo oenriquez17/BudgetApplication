@@ -22,12 +22,16 @@ function handleCheckBox() {
 }
 
 function payBill(id) {
+    var paidBillsMap = {};
+
+    paidBillsMap.MonthlyBillId = id;
+    paidBillsMap.Month = currentMonth;
+    paidBillsMap.Year = currentYear;
+    console.log(paidBillsMap);
     $.ajax({
         type: 'POST',
-        url: '/api/bills/' + id + "/" + currentMonth + "/" + currentYear,
-        data: { id, currentMonth, currentYear },
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
+        url: '/api/bills',
+        data: paidBillsMap,
         success: function () {
             console.log("YAY!");
         }

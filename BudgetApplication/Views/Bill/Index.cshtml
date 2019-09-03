@@ -44,16 +44,7 @@
             @foreach (var bill in Model.AllBills)
             {
                 string chk = "";
-                if (Model.PaidBills.Exists(
-                    b => (b.MonthlyBillId == bill.MonthlyBillId
-                    &&
-                    b.PaidThisMonth.Month.Equals(DateTime.Now.Month)
-                    &&
-                    b.PaidThisMonth.Year.Equals(DateTime.Now.Year))
-                    ))
-                {
-                    chk = "checked";
-                }
+                
                 <tr>
                     <td class="text-primary">@bill.MonthlyBillName</td>
                     <td>

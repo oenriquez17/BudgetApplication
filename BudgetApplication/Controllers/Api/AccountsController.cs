@@ -25,7 +25,7 @@ namespace BudgetApplication.Controllers.Api
         }
 
 
-        // DELETE /api/account/1
+        // DELETE /api/accounts/1
         [HttpDelete]
         public void DeleteAccount(int id)
         {

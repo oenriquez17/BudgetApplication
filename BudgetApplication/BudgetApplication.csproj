@@ -153,6 +153,14 @@
     <Compile Include="Migrations\201909022308073_AddBillPaidMapModel.Designer.cs">
       <DependentUpon>201909022308073_AddBillPaidMapModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909030559135_changedThePaidBillMapModel.cs" />
+    <Compile Include="Migrations\201909030559135_changedThePaidBillMapModel.Designer.cs">
+      <DependentUpon>201909030559135_changedThePaidBillMapModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909030601058_changedThePaidBillMapModelPart2.cs" />
+    <Compile Include="Migrations\201909030601058_changedThePaidBillMapModelPart2.Designer.cs">
+      <DependentUpon>201909030601058_changedThePaidBillMapModelPart2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\MonthlyBill.cs" />
     <Compile Include="Models\PaidBillsMap.cs" />
     <Compile Include="Models\TransactionType.cs" />
@@ -363,6 +371,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909022308073_AddBillPaidMapModel.resx">
       <DependentUpon>201909022308073_AddBillPaidMapModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909030559135_changedThePaidBillMapModel.resx">
+      <DependentUpon>201909030559135_changedThePaidBillMapModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909030601058_changedThePaidBillMapModelPart2.resx">
+      <DependentUpon>201909030601058_changedThePaidBillMapModelPart2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -20,38 +20,34 @@ namespace BudgetApplication.Controllers.Api
             _context = new DatabaseContext();
         }
 
-        //POST /api/customers
+        //POST /api/bills
         [HttpPost]
-        public IHttpActionResult PayBill(int id, int month, int year)
+        public IHttpActionResult PayBill(PaidBillsMap paidBillsMap)
         {
+            System.Diagnostics.Debug.WriteLine(paidBillsMap.MonthlyBillId);
+            System.Diagnostics.Debug.WriteLine(paidBillsMap.Month);
+            System.Diagnostics.Debug.WriteLine(paidBillsMap.Year);
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
             else
             {
-                PaidBillsMap paidBillsMap = new PaidBillsMap();
-                DateTime paidDate = new DateTime(year, month, 1);
-
-                paidBillsMap.MonthlyBillId = id;
-                paidBillsMap.PaidThisMonth = paidDate;
-
                 _context.PaidBillsMap.Add(paidBillsMap);
                 _context.SaveChanges();
 
-                return Created(new Uri(Request.RequestUri + "/" + id), paidBillsMap);
+                return Created(new Uri(Request.RequestUri + "/" + paidBillsMap.PaidBillsMapId), paidBillsMap);
             }
         }
 
         // DELETE /api/bills/1
         [HttpDelete]
-        public void UnpayBill(int id, int month, int year)
+        public void UnpayBill(PaidBillsMap paidBillsMap)
         {
-            DateTime paidDate = new DateTime(year, month, 1);
             var billInDB = _context.PaidBillsMap
-                .SingleOrDefault(b => b.MonthlyBillId == id 
-                && b.PaidThisMonth.Month.Equals(paidDate.Month)
-                && b.PaidThisMonth.Year.Equals(paidDate.Year));
+                .SingleOrDefault(b => b.MonthlyBillId == paidBillsMap.MonthlyBillId
+                && b.Month == paidBillsMap.Month
+                && b.Year == paidBillsMap.Year);
 
             if (billInDB == null)
             {

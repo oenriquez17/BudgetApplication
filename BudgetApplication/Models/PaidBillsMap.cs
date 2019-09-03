@@ -9,10 +9,12 @@ namespace BudgetApplication.Models
 {
     public class PaidBillsMap
     {
-        [Key, Column(Order = 0)]
+        public int PaidBillsMapId { get; set; }
+
         public int MonthlyBillId { get; set; }
 
-        [Key, Column(Order = 1)]
-        public DateTime PaidThisMonth { get; set; }
+        public int Month { get; set; }
+
+        public int Year { get; set; }
     }
 }

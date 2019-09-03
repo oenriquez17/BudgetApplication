@@ -97,7 +97,8 @@ namespace BudgetApplication.Controllers
                         select new
                         {
                             b.MonthlyBillId,
-                            pb.PaidThisMonth
+                            pb.Month,
+                            pb.Year
                         };
 
             foreach(var bill in query)
@@ -105,7 +106,8 @@ namespace BudgetApplication.Controllers
                 paidBillsMap.Add(new PaidBillsMap
                 {
                     MonthlyBillId = bill.MonthlyBillId,
-                    PaidThisMonth = bill.PaidThisMonth
+                    Month = bill.Month,
+                    Year = bill.Year
                 });
             }
 
