@@ -1,0 +1,59 @@
+﻿@model BudgetApplication.ViewModels.ManageMonthlyBillsViewModel
+
+@{
+    ViewBag.Title = "Add Bill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage Bills</h2>
+
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#add">Add</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#delete">Delete</a>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade show active" id="add">
+        
+        <br />
+
+        <div class="container">
+            @using (Html.BeginForm("SaveBill", "Bill", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.NewMonthlyBill.MonthlyBillName)
+                    @Html.TextBoxFor(m => m.NewMonthlyBill.MonthlyBillName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.NewMonthlyBill.MonthlyBillName)
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+            }
+        </div>
+    </div>
+    <div class="tab-pane fade" id="delete">
+
+        <br />
+
+        <div class="container">
+            @using (Html.BeginForm("DeleteBill", "Bill", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.DeleteMonthlyBillId)
+                    @Html.DropDownListFor(
+                        m => m.DeleteMonthlyBillId,
+                    new SelectList(Model.DeleteMonthlyBills,
+                    "MonthlyBillId", "MonthlyBillName"),
+                    "Select Bill",
+                    new { @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.DeleteMonthlyBillId)
+                </div>
+
+                <button type="submit" class="btn btn-danger">Delete</button>
+            }
+        </div>
+    </div>
+</div>

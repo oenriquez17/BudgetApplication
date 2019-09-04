@@ -39,21 +39,45 @@ namespace BudgetApplication.Controllers
         }
 
         [CheckSession]
-        public ActionResult BillForm()
+        public ActionResult ManageBills()
         {
-            return View();
+            int userId = (int)Session["userId"];
+
+            var bills = GetMonthlyBills(userId);
+            var viewModel = new ManageMonthlyBillsViewModel
+            {
+                DeleteMonthlyBills = bills
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult SaveBill(MonthlyBill monthlyBill)
+        public ActionResult SaveBill(ManageMonthlyBillsViewModel viewModel)
         {
             int userId = (int)Session["userId"];
 
             _context.MonthlyBill.Add(new MonthlyBill
             {
-                MonthlyBillName = monthlyBill.MonthlyBillName,
+                MonthlyBillName = viewModel.NewMonthlyBill.MonthlyBillName,
                 UserId = userId
             });
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteBill(ManageMonthlyBillsViewModel viewModel)
+        {
+            int userId = (int)Session["userId"];
+
+            var billInDB = _context.MonthlyBill
+                .Single(b => b.MonthlyBillId == viewModel.DeleteMonthlyBillId
+                && b.UserId == userId);
+
+            _context.MonthlyBill.Remove(billInDB);
 
             _context.SaveChanges();
 
