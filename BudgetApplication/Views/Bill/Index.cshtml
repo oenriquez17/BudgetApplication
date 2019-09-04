@@ -8,6 +8,13 @@
 <h2>Bills</h2>
 
 <div class="container">
+    @Html.ActionLink("Add Monthly Bill", "BillForm", "Bill", null, new { @class = "btn btn-primary float-right" })
+</div>
+
+<br class="clearFloatRight" />
+<br />
+
+<div class="container">
     <div class="row">
         <div class="col-sm text-right">
             <button id="back" class="btn btn-small shadow-none">
@@ -44,7 +51,10 @@
             @foreach (var bill in Model.AllBills)
             {
                 string chk = "";
-                
+                if (Model.PaidBills.Exists(b => b.MonthlyBillId == bill.MonthlyBillId))
+                {
+                    chk = "checked";
+                }
                 <tr>
                     <td class="text-primary">@bill.MonthlyBillName</td>
                     <td>
@@ -67,10 +77,11 @@
         var currentMonth = c.getMonth() + 1;
         var currentYear = c.getFullYear();
 
+        var uId = @Session["userId"];
         var allBills = @Html.Raw(Json.Encode(Model.AllBills));
         var paidBills = @Html.Raw(Json.Encode(Model.PaidBills));
     </script>
-    
+
     <script type="text/javascript" src="@Url.Content("~/Scripts/Bills/Bills.js")"></script>
 }
 

@@ -85,15 +85,19 @@ namespace BudgetApplication.Controllers
             return monthlyBills;
         }
 
-        //Returns list of bills paid
+        //Returns list of bills paid for current Month
         private List<PaidBillsMap> GetPaidMonthlyBills(int userId)
         {
             List<PaidBillsMap> paidBillsMap = new List<PaidBillsMap>();
+            int currentMonth = DateTime.Now.Month;
+            int currentYear = DateTime.Now.Year;
 
             var query = from b in _context.MonthlyBill
                         join pb in _context.PaidBillsMap
                         on b.MonthlyBillId equals pb.MonthlyBillId
-                        where b.UserId == userId
+                        where b.UserId == userId &&
+                        pb.Month == currentMonth &&
+                        pb.Year == currentYear
                         select new
                         {
                             b.MonthlyBillId,
