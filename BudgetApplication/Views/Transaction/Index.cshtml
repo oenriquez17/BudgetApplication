@@ -50,7 +50,14 @@
                             <td>@transaction.DateOfTransaction.ToString("MM/dd/yyyy")</td>
                             <td>@transaction.Comments</td>
                             <td>
-                                <i class="material-icons">delete</i>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-sm shadow-none">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                    <button class="btn btn-sm shadow-none">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     }
